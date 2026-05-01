@@ -1,5 +1,3 @@
-package estructuras.arboles;
-
 import estructuras.listas.ListaDoblementeLigada;
 import estructuras.tdas.Coleccion;
 import java.util.Iterator;
