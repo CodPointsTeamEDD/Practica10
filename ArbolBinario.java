@@ -184,6 +184,7 @@ public abstract class ArbolBinario<T> implements Coleccion<T> {
         }
     }     
 
+    @Override
     public String toString(){
         if(estaVacio()){
             return "No hay árbol";

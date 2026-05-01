@@ -77,6 +77,12 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
         }
     }
 
+    /**
+     * Elimina un elemento de tipo T del árbol.
+     * 
+     * @param elemento elemento a eliminar.
+     * @throws IllegalArgumentException si el elemento es null.
+     */
     @Override
     public void eliminar(T elemento) {
         if (elemento == null) {
@@ -94,17 +100,16 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
      * @return la nueva referencia del subárbol.
      */
     private Vertice eliminar(Vertice v, T elemento) {
-
         if (v == null) {
             return null;
         } else
 
         if (v.elemento.compareTo(elemento) > 0) {
-            eliminar(v.izquierdo, elemento);
+            v.izquierdo = eliminar(v.izquierdo, elemento);
         } else
 
         if (v.elemento.compareTo(elemento) < 0) {
-            eliminar(v.derecho, elemento);
+            v.derecho = eliminar(v.derecho, elemento);
         } else {
 
             this.tamanio--;
@@ -125,19 +130,24 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
 
                 Vertice sucesor = devolverMinimo(v.derecho);
                 v.elemento = sucesor.elemento;
-                eliminar(v.derecho, sucesor.elemento);
+                v.derecho = eliminar(v.derecho, sucesor.elemento);
 
                 if (v.derecho != null) {
                     v.derecho.padre = v;
                 }
 
             }
-
         }
-
         return v;
     }
 
+    /**
+     * Obtiene el vértice con el elemento mínimo de un subárbol,
+     * recorriendo por la izquierda.
+     * 
+     * @param v raíz del subárbol.
+     * @return vértice con el elemento mínimo.
+     */
     private Vertice devolverMinimo(Vertice v) {
         while (v.izquierdo != null) {
             v = v.izquierdo;
@@ -145,11 +155,29 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
         return v;
     }
 
+    /**
+     * Busca un elemento de tipo T dentro del árbol.
+     * 
+     * @param elemento elemento a buscar.
+     * @return {true} si el elemento está en el árbol,
+     *         {@false} en otro caso.
+     */
     @Override
     public boolean buscar(T elemento) {
         return buscar(elemento, this.raiz);
     }
 
+    /**
+     * Busca recursivamente un elemento a partir de un vértice.
+     * 
+     * Dependiendo de la comparación, continúa la búsqueda
+     * en el subárbol izquierdo o derecho.
+     * 
+     * @param elemento elemento a buscar.
+     * @param v        vértice actual.
+     * @return {true} si el elemento se encuentra,
+     *         {false} en otro caso.
+     */
     private boolean buscar(T elemento, Vertice v) {
         if (v == null) {
             return false;
@@ -166,6 +194,15 @@ public class ArbolBinarioOrdenado<T extends Comparable<T>> extends ArbolBinario<
         return buscar(elemento, v.izquierdo);
     }
 
+    /**
+     * Devuelve un recorrido in-order del árbol.
+     * 
+     * El recorrido se realiza iterativamente usando una pila,
+     * visitando primero el subárbol izquierdo, luego la raíz
+     * y finalmente el subárbol derecho.
+     * 
+     * @return lista con los elementos en orden.
+     */
     @Override
     public ListaDoblementeLigada<T> devolverRecorrido() {
         ListaDoblementeLigada<T> recorrido = new ListaDoblementeLigada<>();
