@@ -52,7 +52,7 @@ public class Inventario {
      * @param fin    limite superior del precio
      * @return lista de productos con precio dentro del rango
      */
-    public ListaDoblementeLigada<Producto> productosEnUnRango(int inicio, int fin) {
+    public ListaDoblementeLigada<Producto> productosEnUnRango(double inicio, double fin) {
 
         ListaDoblementeLigada<Producto> listaDelArbol = inventario.devolverRecorrido();
         ListaDoblementeLigada<Producto> listaProductosEnPrecio = new ListaDoblementeLigada<>();
