@@ -15,7 +15,7 @@ public class Inventario{
     public void buscar(Producto p){
         productos.buscar(p);
     }
-    public void productosRangoDePrecio(int minimo, int maximo){
+    public void productosRangoDePrecio(double minimo, double maximo){
         ListaDoblementeLigada<Producto> recorrido = productos.devolverRecorrido();
         ListaDoblementeLigada<Producto> productosEnElRango = new ListaDoblementeLigada<>();
 
