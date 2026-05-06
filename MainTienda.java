@@ -53,69 +53,118 @@ public class MainTienda{
             System.out.println( contador + ") "+  pr.getProducto()+ ", $" + pr.getPrecio());
             contador++;
         }
+        System.out.println("");
+
 
 
         int accion;
 
 
-
-        while(true){
-            System.out.println("Qué quieres hacer?");
+        while (true) {
+            System.out.println("¿Qué quieres hacer?");
             System.out.println("1) agregar producto");
             System.out.println("2) eliminar producto");
             System.out.println("3) ver productos del inventario");
             System.out.println("4) ver productos dentro de un rango de precio");
             System.out.println("5) salir");
 
-            System.out.print(">");
+            System.out.print("> ");
+
+            if (!sc.hasNextInt()) {
+                System.out.println("Entrada inválida. Debes ingresar un número.");
+                sc.nextLine();
+                continue;
+            }
+
             accion = sc.nextInt();
             sc.nextLine();
 
             switch (accion) {
                 case 1:
-                    int pPorAgregar;
+                    System.out.println("¿Qué producto deseas agregar? (1-15)");
+                    System.out.print("> ");
 
-                    System.out.println("Qué producto (de los productos posibles) deseas agregar? (1-25)");
-                    System.out.print(">");
-                    pPorAgregar = sc.nextInt();
+                    if (!sc.hasNextInt()) {
+                        System.out.println("Entrada inválida.");
+                        sc.nextLine();
+                        break;
+                    }
 
-                    inv.agregar(productosPosibles.acceder(pPorAgregar-1));
+                    int pPorAgregar = sc.nextInt();
+                    sc.nextLine();
 
+                    if (pPorAgregar < 1 || pPorAgregar > 15) {
+                        System.out.println("El número debe estar entre 1 y 15.");
+                        break;
+                    }
+
+                    inv.agregar(productosPosibles.acceder(pPorAgregar - 1));
+                    System.out.println("Producto agregado.");
                     break;
+
                 case 2:
-                    int pPorEliminar;
+                    System.out.println("¿Qué producto deseas eliminar? (1-15)");
+                    System.out.print("> ");
 
-                    System.out.println("Qué producto (de los productos posibles) deseas eliminar? (1-25)");
-                    System.out.print(">");
-                    pPorAgregar = sc.nextInt();
+                    if (!sc.hasNextInt()) {
+                        System.out.println("Entrada inválida.");
+                        sc.nextLine();
+                        break;
+                    }
 
-                    inv.eliminar(productosPosibles.acceder(pPorAgregar-1));
+                    int pPorEliminar = sc.nextInt();
+                    sc.nextLine();
+
+                    if (pPorEliminar < 1 || pPorEliminar > 15) {
+                        System.out.println("El número debe estar entre 1 y 15.");
+                        break;
+                    }
+
+                    inv.eliminar(productosPosibles.acceder(pPorEliminar - 1));
+                    System.out.println("Producto eliminado.");
                     break;
+
                 case 3:
                     System.out.println(inv);
                     break;
-                case 4:
-                    double minimo;
-                    double maximo;
-                    System.out.println("Ingresa el valor minimo:");
-                    System.out.println(">");
 
-                    minimo = sc.nextDouble();
+                case 4:
+                    System.out.println("Ingresa el valor mínimo:");
+                    System.out.print("> ");
+
+                    if (!sc.hasNextDouble()) {
+                        System.out.println("Entrada inválida.");
+                        sc.nextLine();
+                        break;
+                    }
+                    double minimo = sc.nextDouble();
                     sc.nextLine();
 
                     System.out.println("Ingresa el valor máximo:");
-                    System.out.println(">");
+                    System.out.print("> ");
 
-                    maximo = sc.nextDouble();
+                    if (!sc.hasNextDouble()) {
+                        System.out.println("Entrada inválida.");
+                        sc.nextLine();
+                        break;
+                    }
+                    double maximo = sc.nextDouble();
                     sc.nextLine();
+
+                    if (minimo > maximo) {
+                        System.out.println("El mínimo no puede ser mayor que el máximo.");
+                        break;
+                    }
 
                     inv.productosRangoDePrecio(minimo, maximo);
                     break;
+
                 case 5:
-                    System.exit(0);
-                    break;
+                    System.out.println("Saliendo...");
+                    return;
+
                 default:
-                    throw new AssertionError();
+                    System.out.println("Opción inválida.");
             }
         }
 
