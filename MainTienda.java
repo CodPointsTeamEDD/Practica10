@@ -98,8 +98,14 @@ public class MainTienda{
                         break;
                     }
 
-                    inv.agregarUnProducto(productosPosibles.acceder(pPorAgregar - 1));
-                    System.out.println("Producto agregado.");
+                    if (!inv.inventario.buscar(productosPosibles.acceder(pPorAgregar - 1))) {
+                        inv.agregarUnProducto(productosPosibles.acceder(pPorAgregar - 1));
+                        System.out.println("Producto agregado.");
+                    } else {
+                        System.out.println("Producto agregado.");
+
+                    }
+
                     break;
 
                 case 2:
@@ -120,8 +126,14 @@ public class MainTienda{
                         break;
                     }
 
-                    inv.eliminarUnProducto(productosPosibles.acceder(pPorEliminar - 1));
-                    System.out.println("Producto eliminado.");
+
+                    if (inv.inventario.buscar(productosPosibles.acceder(pPorEliminar - 1))) {
+                        inv.eliminarUnProducto(productosPosibles.acceder(pPorEliminar - 1));
+                        System.out.println("Producto eliminado.");
+                    } else {
+                        System.out.println("Producto eliminado.");
+                    }
+
                     break;
 
                 case 3:
