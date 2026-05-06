@@ -4,6 +4,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Clase que resuelve el problema planteado
+ * 
+ * @author Luis Fernando Quintana López
+ * @author Erick Xavier Martinez Briones
+ * @version 1.0.0
+ * @since 2026
+ */
+
 public class MainTienda{
     public static void main(String[] args) {
         // Variables
